@@ -1,9 +1,19 @@
 pipeline{
     agent any
+    
+    environment{
+        PATH = "/opt/maven3/bin:$PATH"
+    }
     stages{
         stage("Git Checkout"){
             steps{
                 git credentialsId: '1acd35fe-b030-4a2c-9db5-3314728bfb30', url: 'https://github.com/sadiq-inamdar/Learning.git'
+            }
+        }
+        stage("Mavin Build"){
+            steps{
+                sh "mvn clean package"
+                
             }
         }
     }
